@@ -58,12 +58,21 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7vY-EN-gbl">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="RNb-ic-HfJ" style="IBUITableViewCellStyleDefault" id="7vY-EN-gbl">
                                 <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7vY-EN-gbl" id="MmS-wl-Vlg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RNb-ic-HfJ">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -72,7 +81,10 @@
                             <outlet property="delegate" destination="TrU-yH-AMc" id="4aS-KY-TJR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Average Calculator" id="CKL-hX-13j"/>
+                    <navigationItem key="navigationItem" title="Average Calculator" id="CKL-hX-13j">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="gHb-ge-0xM"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yey-D4-FxK"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dv7-2V-HFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
