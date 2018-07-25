@@ -9,9 +9,22 @@
 import UIKit
 
 class AverageCalculatorViewController: UITableViewController {
+    
+    @IBOutlet var averageLabel: UILabel!
+    @IBOutlet var numberOfItemsLabel: UILabel!
+    
+    @IBAction func addNumber(_ sender: UIBarButtonItem) {
+        // Dialog for entering a new number
+    }
+    
     var numbers:[Float] = []
     var average:Float = 0.0
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
     
     func calculateAverage() -> Bool {
         if numbers.isEmpty {
@@ -21,10 +34,6 @@ class AverageCalculatorViewController: UITableViewController {
             self.average = sum / Float(numbers.count)
             return true
         }
-    }
-    
-    func addNumber(number:Float) {
-        self.numbers.append(number)
     }
     
     override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -82,9 +82,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Average Calculator" id="CKL-hX-13j">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="gHb-ge-0xM"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yey-D4-FxK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yey-D4-FxK">
+                            <connections>
+                                <action selector="addNumber:" destination="TrU-yH-AMc" id="Mh1-FR-75P"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="averageLabel" destination="UAn-bu-JO8" id="cRu-HA-zVV"/>
+                        <outlet property="numberOfItemsLabel" destination="XDQ-Ko-b0j" id="kev-5U-9SP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dv7-2V-HFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
