@@ -8,18 +8,19 @@
 
 import UIKit
 
-class AverageCalculatorViewController: UITableViewController {
+class AverageCalculatorViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet var averageLabel: UILabel!
     @IBOutlet var numberOfItemsLabel: UILabel!
     
     @IBAction func addNumber(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Add Number", message: "Enter a number.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Add Number", message: "Enter a number:", preferredStyle: .alert)
         
         alertController.addTextField {
             (textField) -> Void in
             textField.placeholder = "Number"
             textField.keyboardType = .decimalPad
+            textField.delegate = self
         }
         
         let addNumberAction = UIAlertAction(title: "Add", style: .default) {
@@ -80,5 +81,15 @@ class AverageCalculatorViewController: UITableViewController {
         cell.textLabel?.text = "\(number)"
         
         return cell
+    }
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        
+        let existingTextHasSeparator = textField.text?.range(of: ".")
+        let replacementTextHasSeparator = string.range(of: ".")
+        
+        return existingTextHasSeparator == nil || replacementTextHasSeparator == nil
     }
 }
