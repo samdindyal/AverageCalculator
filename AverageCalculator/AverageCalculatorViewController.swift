@@ -14,7 +14,31 @@ class AverageCalculatorViewController: UITableViewController {
     @IBOutlet var numberOfItemsLabel: UILabel!
     
     @IBAction func addNumber(_ sender: UIBarButtonItem) {
-        // Dialog for entering a new number
+        let alertController = UIAlertController(title: "Add Number", message: "Enter a number.", preferredStyle: .alert)
+        
+        alertController.addTextField {
+            (textField) -> Void in
+            textField.placeholder = "Number"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let addNumberAction = UIAlertAction(title: "Add", style: .default) {
+            (action) in
+            if let text = alertController.textFields?.first?.text!,
+                let number = Float(text),
+                !number.isNaN {
+                self.numbers.append(number)
+                self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                self.updateLabels()
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(addNumberAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     var numbers:[Float] = []
@@ -22,7 +46,6 @@ class AverageCalculatorViewController: UITableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
@@ -33,6 +56,16 @@ class AverageCalculatorViewController: UITableViewController {
             let sum = numbers.reduce(0,{$0 + $1})
             self.average = sum / Float(numbers.count)
             return true
+        }
+    }
+    
+    func updateLabels() {
+        if calculateAverage() {
+            averageLabel.text = "\(self.average)"
+            numberOfItemsLabel.text = "\(numbers.count) ITEM\(numbers.count == 1 ? "" : "S")"
+        } else {
+            averageLabel.text = "???"
+            numberOfItemsLabel.text = "??? ITEMS"
         }
     }
     
