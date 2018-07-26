@@ -50,23 +50,23 @@ class AverageCalculatorViewController: UITableViewController, UITextFieldDelegat
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
-    func calculateAverage() -> Bool {
+    func calculateAverage() {
         if numbers.isEmpty {
-            return false
+            self.average = 0.0
         } else {
             let sum = numbers.reduce(0,{$0 + $1})
             self.average = sum / Float(numbers.count)
-            return true
         }
     }
     
     func updateLabels() {
-        if calculateAverage() {
-            averageLabel.text = "\(self.average)"
-            numberOfItemsLabel.text = "\(numbers.count) ITEM\(numbers.count == 1 ? "" : "S")"
-        } else {
+        calculateAverage()
+        if self.average.isNaN{
             averageLabel.text = "???"
             numberOfItemsLabel.text = "??? ITEMS"
+        } else {
+            averageLabel.text = "\(self.average)"
+            numberOfItemsLabel.text = "\(numbers.count) ITEM\(numbers.count == 1 ? "" : "S")"
         }
     }
     
@@ -81,6 +81,16 @@ class AverageCalculatorViewController: UITableViewController, UITextFieldDelegat
         cell.textLabel?.text = "\(number)"
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            numbers.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            updateLabels()
+            
+        }
     }
     
     func textField(_ textField: UITextField,
